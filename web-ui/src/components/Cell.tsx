@@ -11,6 +11,7 @@ export default function Cell({ type, onClick }: CellProps) {
     wall: 'bg-black',
     start: 'bg-green-500',
     goal: 'bg-red-500',
+    path: 'bg-blue-500',
   };
 
   return (

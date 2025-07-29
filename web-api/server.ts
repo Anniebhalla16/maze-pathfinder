@@ -1,5 +1,6 @@
 import { RequestHandler } from "express";
 import http from 'http';
+import { AStarSearch } from "./src/AStarSearch";
 import { SolveRequest } from "./types";
 
 const express = require('express')
@@ -15,18 +16,20 @@ const port = 3001
 app.use(cors());
 app.use(express.json());
 
-const solveHandler: RequestHandler = (req, res) => {
+const solveHandler: RequestHandler = async (req, res) => {
   const { grid, start, goal } = req.body as SolveRequest;
 
   if(!start || !goal || !grid) {
         return res.status(400).json({error: "Missing Input(s) for A* Algorithm"})
     }
-    // dummy data
-    const path = [start, goal]; 
-    const visitedCount = 10;
-    const pathLength = path.length;
 
-    res.json({ path, pathLength, visitedCount });
+  try {
+    const result = await AStarSearch(grid, start, goal, () => {});
+    return res.status(200).json(result); 
+  } catch (error) {
+    console.error("A* failed:", error);
+    return res.status(500).json({ error: "Internal server error" }); // fallback
+  }
 };
 
 app.post('/solve', solveHandler);

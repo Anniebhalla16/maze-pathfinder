@@ -21,7 +21,7 @@ export async function AStarSearch(
   start: Loc,
   goal: Loc,
   onVisit: (pos: Loc) => void
-): Promise<{ path: Loc[]; visitedCount: number }> {
+): Promise<{ path: Loc[]; visited: Loc[] }> {
   const openSet: Node[] = [];
   const closedSet: Loc[] = [];
   const visited: Loc[] = [];
@@ -55,7 +55,7 @@ export async function AStarSearch(
     visited.push(current_sq.position);
 
     // to show live updates using web socket
-    onVisit(current_sq.position);
+    // onVisit(current_sq.position);
 
     // if the current_sq is goal node then path is found tracing back through parents - STOP
     if (row === goal[0] && col === goal[1]) {
@@ -65,7 +65,7 @@ export async function AStarSearch(
         path.unshift(temp.position);
         temp = temp.parent;
       }
-      return { path, visitedCount: visited.length };
+      return { path,visited };
     }
 
     //  if goal not reached explore the 8 neighbors
@@ -96,9 +96,9 @@ export async function AStarSearch(
       openSet.push(NeighborNode)
     }
 
-    await new Promise((r) => setTimeout(r, 10));
+    // await new Promise((r) => setTimeout(r, 10));
   }
 
 
-  return { path: [], visitedCount: visited.length };
+  return { path: [], visited };
 }

@@ -1,13 +1,9 @@
 'use client';
 
-import { CellType } from '@/types/cellTypes';
+import { CellType, GRID_SIZE, MODES } from '@/types/cellTypes';
 import { Button } from '@mui/material';
 import { useState } from 'react';
 import Cell from './Cell';
-
-const GRID_SIZE = 20;
-
-type MODES = 'GENERATE_MAZE' | 'SELECT_START' | 'SELECT_GOAL';
 
 export default function Grid() {
   const [mode, setMode] = useState<MODES>('GENERATE_MAZE');
@@ -37,11 +33,33 @@ export default function Grid() {
     setGrid(newGrid);
   };
 
-  const handleSolve = () => {
+  const solveMaze = async () => {
     if (!start || !goal) {
-      console.log('please select start and goal');
+      alert('Please set both start and goal points');
       return;
     }
+
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_ENDPOINT_BASE_URL}/solve`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ grid, start, goal }),
+      }
+    );
+
+    const data = await response.json();
+
+    // data.path: Loc[]
+    const newGrid = grid.map((row) => [...row]);
+
+    for (const [r, c] of data.path) {
+      if (newGrid[r][c] === 'free') {
+        newGrid[r][c] = 'path';
+      }
+    }
+
+    setGrid(newGrid);
   };
 
   return (
@@ -91,7 +109,7 @@ export default function Grid() {
             </Button>
           </div>
           {/* Todo: solve function */}
-          <Button onClick={() => handleSolve} variant="contained">
+          <Button onClick={solveMaze} variant="contained">
             Solve
           </Button>
         </div>
