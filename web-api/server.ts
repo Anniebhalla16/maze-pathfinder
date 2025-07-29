@@ -47,7 +47,7 @@ const solveHandler: RequestHandler = async (req, res) => {
     if (socket?.readyState === WebSocket.OPEN) {
       socket.send(
         JSON.stringify({
-          type: 'done',
+          type: result.path.length === 0 ? 'unreachable' : 'done',
           path: result.path,
           visited: result.visited,
         })

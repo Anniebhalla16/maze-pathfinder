@@ -65,7 +65,7 @@ export async function AStarSearch(
         path.unshift(temp.position);
         temp = temp.parent;
       }
-      return { path,visited };
+      return { path, visited };
     }
 
     //  if goal not reached explore the 8 neighbors

@@ -57,8 +57,8 @@ export default function Grid() {
       process.env.NEXT_PUBLIC_API_ENDPOINT_BASE_URL!.replace('http', 'ws')
     );
 
-    socket.onopen = () => console.log('🟢 WebSocket connected');
-    socket.onclose = () => console.log('🔴 WebSocket disconnected');
+    socket.onopen = () => console.log('WebSocket connected');
+    socket.onclose = () => console.log('WebSocket disconnected');
 
     socket.onmessage = (event) => {
       const message = JSON.parse(event.data);
@@ -72,6 +72,11 @@ export default function Grid() {
           }
           return updated;
         });
+      }
+
+      if (message.type === 'unreachable') {
+        alert('No path found');
+        return;
       }
 
       if (message.type === 'done') {
