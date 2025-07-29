@@ -12,7 +12,7 @@ export default function Cell({ type, onClick }: CellProps) {
     start: 'bg-green-500',
     goal: 'bg-red-500',
     path: 'bg-blue-500',
-    visited: 'bg-purple-500',
+    visited: 'bg-blue-100',
   };
 
   return (
