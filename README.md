@@ -31,12 +31,14 @@ Create a .env.local in web-ui/:
 ---
 ## Run the Maze Path finder
 
-- cd <root dir>
-- chmod +x maze.sh
-- ./maze.sh
-  
+cd <root_dir>
+chmod +x maze.sh
+./maze.sh
+
+See project live on:
 Frontend : http://localhost:3000
 Backend :  http://localhost:3001
+
 ---
 ## Resources
 1. A* Search Algorithm - https://medium.com/@nicholas.w.swift/easy-a-star-pathfinding-7e6689c7f7b2 
