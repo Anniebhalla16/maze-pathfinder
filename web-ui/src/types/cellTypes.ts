@@ -1,0 +1,1 @@
+export type CellType = 'start' | 'goal' | 'free' | 'wall'
