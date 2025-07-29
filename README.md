@@ -1,4 +1,3 @@
-## The Maze PathFinder
 # 🧭 Maze Pathfinder – A* Visualizer with Live Updates
 
 A full-stack pathfinding visualizer that uses the A* algorithm to solve mazes in real-time, featuring a React + Tailwind frontend and a ExpressJs + WebSocket backend.
@@ -22,22 +21,39 @@ A full-stack pathfinding visualizer that uses the A* algorithm to solve mazes in
 - WebSocket server
 - TypeScript
 - Implementation of A* pathfinding
+- Jest for testing
   
 ---
 ## Environment Variables
+
 Create a .env.local in web-ui/:
 - NEXT_PUBLIC_API_ENDPOINT_BASE_URL=http://localhost:3001
 
 ---
-## Run the Maze Path finder
+## ▶️ Running the Maze Pathfinder Locally
 
-cd <root_dir>
-chmod +x maze.sh
-./maze.sh
+### 📦 Step 1: Install & Start Frontend
 
-See project live on:
-Frontend : http://localhost:3000
-Backend :  http://localhost:3001
+```bash
+cd web-ui
+npm install
+npm run dev
+```
+
+App will be available at:
+🌐 Frontend: http://localhost:3000
+
+### 🔧 Step 2: Install & Start Backend
+Open a second terminal tab/window:
+
+```bash
+cd web-api 
+npm install
+npx ts-node server.ts
+```
+
+API & WebSocket server will be running at:
+🔌 Backend: http://localhost:3001
 
 ---
 ## Resources
