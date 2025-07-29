@@ -4,6 +4,10 @@ A full-stack pathfinding visualizer that uses the A* algorithm to solve mazes in
 
 <img width="665" height="737" alt="Screenshot 2025-07-29 at 16 28 54" src="https://github.com/user-attachments/assets/76ea5f20-2ed0-4260-a0bb-a690b3a72c81" />
 
+
+https://github.com/user-attachments/assets/c042a867-ec15-4807-beb9-5b365777d1b3
+
+
 ---
 
 ## 🛠️ Technologies Used
