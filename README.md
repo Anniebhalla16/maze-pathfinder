@@ -6,4 +6,4 @@
 3. MUI Components - https://mui.com/material-ui/all-components/
 4. Web Socket - https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API & https://youtu.be/1BfCnjr_Vjg?si=XckCN6TlvPESgH8s
 5. Express js - https://www.geeksforgeeks.org/node-js/node-js-building-simple-rest-api-in-express/
-6. 
+6. Web Socket library npm - https://www.npmjs.com/package/ws

@@ -2,7 +2,7 @@
 
 import { CellType, GRID_SIZE, MODES } from '@/types/cellTypes';
 import { Button } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Cell from './Cell';
 
 export default function Grid() {
@@ -49,18 +49,47 @@ export default function Grid() {
     );
 
     const data = await response.json();
-
-    // data.path: Loc[]
-    const newGrid = grid.map((row) => [...row]);
-
-    for (const [r, c] of data.path) {
-      if (newGrid[r][c] === 'free') {
-        newGrid[r][c] = 'path';
-      }
-    }
-
-    setGrid(newGrid);
+    console.log('A* search started:', data.status);
   };
+
+  useEffect(() => {
+    const socket = new WebSocket(
+      process.env.NEXT_PUBLIC_API_ENDPOINT_BASE_URL!.replace('http', 'ws')
+    );
+
+    socket.onopen = () => console.log('🟢 WebSocket connected');
+    socket.onclose = () => console.log('🔴 WebSocket disconnected');
+
+    socket.onmessage = (event) => {
+      const message = JSON.parse(event.data);
+
+      if (message.type === 'visit') {
+        const [r, c] = message.pos;
+        setGrid((prev) => {
+          const updated = prev.map((row) => [...row]);
+          if (updated[r][c] === 'free') {
+            updated[r][c] = 'visited';
+          }
+          return updated;
+        });
+      }
+
+      if (message.type === 'done') {
+        const { path } = message;
+        setGrid((prev) => {
+          const updated = prev.map((row) => [...row]);
+          for (const [r, c] of path) {
+            if (updated[r][c] === 'free' || updated[r][c] === 'visited') {
+              updated[r][c] = 'path';
+            }
+          }
+          return updated;
+        });
+      }
+    };
+
+    return () => socket.close();
+  }, []);
 
   return (
     <>

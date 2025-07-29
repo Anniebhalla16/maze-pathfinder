@@ -55,7 +55,7 @@ export async function AStarSearch(
     visited.push(current_sq.position);
 
     // to show live updates using web socket
-    // onVisit(current_sq.position);
+    onVisit(current_sq.position);
 
     // if the current_sq is goal node then path is found tracing back through parents - STOP
     if (row === goal[0] && col === goal[1]) {
@@ -96,7 +96,7 @@ export async function AStarSearch(
       openSet.push(NeighborNode)
     }
 
-    // await new Promise((r) => setTimeout(r, 10));
+    await new Promise((r) => setTimeout(r, 40));
   }
 
 
