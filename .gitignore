@@ -2,6 +2,7 @@
 
 # dependencies
 web-ui/node_modules
+web-api/node_modules
 web-ui/.pnp
 web-ui/.pnp.*
 web-ui/.yarn/*
