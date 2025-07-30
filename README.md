@@ -17,6 +17,7 @@ https://github.com/user-attachments/assets/c042a867-ec15-4807-beb9-5b365777d1b3
 - React
 - TypeScript
 - Tailwind CSS
+- MUI React Components
 - Native WebSocket client for real-time updates
 
 ### **Backend (`web-api`)**
